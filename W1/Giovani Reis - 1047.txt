@@ -1,0 +1,20 @@
+# Entrada dos valores
+horaInicial, minutoInicial, horaFinal, minutoFinal = map(int, input().split())
+
+# Converter horas para minutos
+horaInicial = horaInicial * 60
+horaFinal = horaFinal * 60
+
+# Calcular duração do jogo
+total = ((horaFinal + minutoFinal) - (horaInicial + minutoInicial))
+
+# Se total for negativo, significa que o jogo passou para o próximo dia
+if total <= 0:
+    total += 24 * 60  # Adiciona 24 horas em minutos para corrigir
+
+# Calcula horas e minutos
+horas = total // 60
+minutos = total % 60
+
+# Exibe resultado
+print(f"O JOGO DUROU {horas} HORA(S) E {minutos} MINUTO(S)")
