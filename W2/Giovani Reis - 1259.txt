@@ -1,0 +1,14 @@
+def ordenar_numeros(n, numeros):
+    pares = sorted([x for x in numeros if x % 2 == 0])
+    impares = sorted([x for x in numeros if x % 2 != 0], reverse=True)
+    return pares + impares
+
+def main():
+    N = int(input())
+    numeros = [int(input()) for _ in range(N)]
+    resultado = ordenar_numeros(N, numeros)
+    for num in resultado:
+        print(num)
+
+if __name__ == "__main__":
+    main()

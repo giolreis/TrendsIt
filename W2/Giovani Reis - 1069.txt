@@ -1,0 +1,22 @@
+def contar_diamantes(caso):
+    pilha = []
+    diamantes = 0
+    
+    for caractere in caso:
+        if caractere == '<':
+            pilha.append(caractere)
+        elif caractere == '>':
+            if pilha and pilha[-1] == '<':
+                pilha.pop()
+                diamantes += 1
+    
+    return diamantes
+
+def main():
+    N = int(input())
+    for _ in range(N):
+        caso = input().strip()
+        print(contar_diamantes(caso))
+
+if __name__ == "__main__":
+    main()

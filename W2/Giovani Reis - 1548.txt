@@ -1,0 +1,31 @@
+def contar_alunos_fixos(test_cases):
+    resultados = []
+    
+    for case in test_cases:
+        M, notas = case
+        alunos = [(notas[i], i) for i in range(M)]
+        alunos_ordenados = sorted(alunos, key=lambda x: (-x[0], x[1]))
+        
+        contador = 0
+        for pos_atual, (nota, pos_original) in enumerate(alunos_ordenados):
+            if pos_atual == pos_original:
+                contador += 1
+        
+        resultados.append(contador)
+    
+    return resultados
+
+
+if __name__ == "__main__":
+    N = int(input())
+    test_cases = []
+    
+    for _ in range(N):
+        M = int(input())
+        notas = list(map(int, input().split()))
+        test_cases.append((M, notas))
+    
+    resultados = contar_alunos_fixos(test_cases)
+    
+    for resultado in resultados:
+        print(resultado)

@@ -1,0 +1,17 @@
+def fibonacci(n):
+    if n == 0:
+        return 0, 1
+    elif n == 1:
+        return 1, 1
+    
+    fib_n1, calls_n1 = fibonacci(n - 1)
+    fib_n2, calls_n2 = fibonacci(n - 2)
+    
+    return fib_n1 + fib_n2, calls_n1 + calls_n2 + 1
+
+if __name__ == "__main__":
+    N = int(input())
+    for _ in range(N):
+        X = int(input())
+        result, num_calls = fibonacci(X)
+        print(f"fib({X}) = {num_calls} calls = {result}")

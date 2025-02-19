@@ -1,0 +1,24 @@
+def processar_cartas(n):
+    from collections import deque
+    
+    pilha = deque(range(1, n + 1))
+    descartes = []
+    
+    while len(pilha) >= 2:
+        descartes.append(pilha.popleft())
+        pilha.append(pilha.popleft())
+    
+    carta_remanescente = pilha[0]
+    return descartes, carta_remanescente
+
+def main():
+    while True:
+        n = int(input())
+        if n == 0:
+            break
+        descartes, carta_remanescente = processar_cartas(n)
+        print("Discarded cards:", ", ".join(map(str, descartes)))
+        print("Remaining card:", carta_remanescente)
+
+if __name__ == "__main__":
+    main()

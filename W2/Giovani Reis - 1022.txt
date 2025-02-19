@@ -1,0 +1,35 @@
+import math
+
+def simplificar(numerador, denominador):
+    mdc = math.gcd(numerador, denominador)
+    return numerador // mdc, denominador // mdc
+
+def calcular_expressao(N1, D1, operador, N2, D2):
+    if operador == '+':
+        numerador = N1 * D2 + N2 * D1
+        denominador = D1 * D2
+    elif operador == '-':
+        numerador = N1 * D2 - N2 * D1
+        denominador = D1 * D2
+    elif operador == '*':
+        numerador = N1 * N2
+        denominador = D1 * D2
+    elif operador == '/':
+        numerador = N1 * D2
+        denominador = N2 * D1
+    
+    return numerador, denominador
+
+def main():
+    N = int(input())
+    for _ in range(N):
+        N1, barra1, D1, operador, N2, barra2, D2 = input().split()
+        N1, D1, N2, D2 = int(N1), int(D1), int(N2), int(D2)
+        
+        numerador, denominador = calcular_expressao(N1, D1, operador, N2, D2)
+        simplificado_num, simplificado_den = simplificar(numerador, denominador)
+        
+        print(f"{numerador}/{denominador} = {simplificado_num}/{simplificado_den}")
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,15 @@
+def contar_numeros():
+    N = int(input())
+    contagem = {}
+    
+    for _ in range(N):
+        numero = int(input())
+        if numero in contagem:
+            contagem[numero] += 1
+        else:
+            contagem[numero] = 1
+    
+    for numero in sorted(contagem):
+        print(f"{numero} aparece {contagem[numero]} vez(es)")
+
+contar_numeros()
