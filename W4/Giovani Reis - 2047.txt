@@ -1,0 +1,75 @@
+from collections import deque, defaultdict
+
+def bfs(capacidade, origem, destino, pai):
+    fila = deque([origem])
+    visitado = set([origem])
+    
+    while fila:
+        u = fila.popleft()
+        for v in capacidade[u]:
+            if v not in visitado and capacidade[u][v] > 0:
+                pai[v] = u
+                visitado.add(v)
+                fila.append(v)
+                if v == destino:
+                    return True
+    return False
+
+def edmonds_karp(capacidade, origem, destino):
+    pai = {}
+    fluxo_maximo = 0
+    while bfs(capacidade, origem, destino, pai):
+        fluxo_caminho = float('Inf')
+        v = destino
+        while v != origem:
+            u = pai[v]
+            fluxo_caminho = min(fluxo_caminho, capacidade[u][v])
+            v = u
+        v = destino
+        while v != origem:
+            u = pai[v]
+            capacidade[u][v] -= fluxo_caminho
+            capacidade[v][u] += fluxo_caminho
+            v = u
+        fluxo_maximo += fluxo_caminho
+    return fluxo_maximo
+
+def processar_instancia(id_instancia):
+    num_cidades = int(input().strip())
+    if num_cidades == 0:
+        return False
+    
+    passageiros = {}
+    total_passageiros = 0
+    for _ in range(num_cidades):
+        linha = input().strip().split()
+        nome_cidade = "-".join(linha[:-1])
+        passageiros[nome_cidade] = int(linha[-1])
+        total_passageiros += int(linha[-1])
+    
+    num_voos, destino = input().strip().split(maxsplit=1)
+    num_voos = int(num_voos)
+    
+    grafo = defaultdict(lambda: defaultdict(int))
+    for _ in range(num_voos):
+        linha = input().strip().split()
+        cidade_a = "-".join(linha[:-1])
+        cidade_b = linha[-2]
+        capacidade = int(linha[-1])
+        grafo[cidade_a][cidade_b] += capacidade
+    
+    origem = "origem"
+    for cidade, quantidade in passageiros.items():
+        grafo[origem][cidade] = quantidade
+    
+    fluxo_maximo = edmonds_karp(grafo, origem, destino)
+    
+    print(f"Instancia {id_instancia}")
+    print("viavel" if fluxo_maximo >= total_passageiros else "inviavel")
+    print()
+    return True
+
+if __name__ == "__main__":
+    id_instancia = 1
+    while processar_instancia(id_instancia):
+        id_instancia += 1

@@ -1,0 +1,26 @@
+def knapsack(n, p, pedidos):
+    matriz = [[0] * (p + 1) for _ in range(n + 1)]
+    
+    for i in range(1, n + 1):
+        tempo, pizzas = pedidos[i - 1]
+        for j in range(p + 1):
+            if pizzas > j:
+                matriz[i][j] = matriz[i - 1][j]
+            else:
+                matriz[i][j] = max(matriz[i - 1][j], matriz[i - 1][j - pizzas] + tempo)
+    
+    return matriz[n][p]
+
+def main():
+    while True:
+        n = int(input())
+        if n == 0:
+            break
+        
+        p = int(input())
+        pedidos = [tuple(map(int, input().split())) for _ in range(n)]
+        
+        print(f"{knapsack(n, p, pedidos)} min.")
+
+if __name__ == "__main__":
+    main()

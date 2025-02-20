@@ -1,0 +1,24 @@
+def calcular_gastos_feira():
+    N = int(input())
+    
+    for _ in range(N):
+        produtos_disponiveis = {}
+        M = int(input())
+        
+        for _ in range(M):
+            produto, preco = input().split()
+            produtos_disponiveis[produto] = float(preco)
+        
+        P = int(input())
+        custo_total = 0.0
+        
+        for _ in range(P):
+            produto, quantidade = input().split()
+            quantidade = int(quantidade)
+            
+            if produto in produtos_disponiveis:
+                custo_total += produtos_disponiveis[produto] * quantidade
+        
+        print(f"R$ {custo_total:.2f}")
+
+calcular_gastos_feira()

@@ -1,0 +1,16 @@
+import math
+
+def calcular_anagramas(s):
+    return math.factorial(len(s))
+
+def main():
+    while True:
+        s = input().strip()
+        
+        if s == "0":
+            break
+        
+        print(calcular_anagramas(s))
+
+if __name__ == "__main__":
+    main()

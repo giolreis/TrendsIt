@@ -1,0 +1,26 @@
+def gerar_sequencia():
+    caso = 1
+    while True:
+        try:
+            N = int(input())
+            sequencia = []
+            total_numeros = 0
+
+            for i in range(N + 1):
+                sequencia.extend([i] * i)
+                total_numeros += i
+
+            if N >= 0:
+                total_numeros += 1
+                sequencia.insert(0, 0)
+
+           
+            print(f"Caso {caso}: {total_numeros} numero" + ("s" if total_numeros != 1 else ""))
+            print(" ".join(map(str, sequencia)))
+            print() 
+            caso += 1
+
+        except EOFError:
+            break
+
+gerar_sequencia()

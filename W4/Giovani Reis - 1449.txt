@@ -1,0 +1,28 @@
+def traduzir_letra(dicionario, letra):
+    palavras = letra.split()
+    traduzidas = []
+    for palavra in palavras:
+        traduzidas.append(dicionario.get(palavra, palavra))
+    return " ".join(traduzidas)
+
+def main():
+    T = int(input())
+    
+    for _ in range(T):
+        # Lê M e N
+        M, N = map(int, input().split())
+        
+        dicionario = {}
+        for _ in range(M):
+            japones = input().strip()
+            portugues = input().strip()
+            dicionario[japones] = portugues
+      
+        for _ in range(N):
+            letra = input().strip()
+            print(traduzir_letra(dicionario, letra))
+        
+        print()
+
+if __name__ == "__main__":
+    main()
